@@ -6,26 +6,24 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 
-model Blog {
-  id         Int      @id @default(autoincrement())
-  title      String
-  description String
-  image      String
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  tags       Tag[]
+enum Tag {
+  TECHNOLOGY
+  SPORTS
+  TRAVEL
+  FOOD
 }
 
-model Tag {
-  id         Int      @id @default(autoincrement())
-  title      String
-  blog_id    Int
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  blog       Blog     @relation(fields: [blog_id], references: [id])
+model Blog {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  image       String
+  tag         Tag
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
 }
