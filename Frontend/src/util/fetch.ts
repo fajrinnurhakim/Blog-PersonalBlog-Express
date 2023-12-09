@@ -33,20 +33,33 @@ export const createBlog = async (
     title: string,
     description: string,
     tag: string,
-    image: string
+    image: File | null
 ) => {
     try {
-        const response = await axios.post(`http://localhost:3000/blogs`, {
-            title,
-            description,
-            tag,
-            image,
-        });
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("tag", tag);
+        if (image) {
+            formData.append("image", image);
+        }
+
+        const response = await axios.post(
+            `http://localhost:3000/blogs`,
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
+
         Swal.fire({
             icon: "success",
             title: "Success...",
             text: "Create Blog Successfully!",
         });
+        window.location.href = "/dashboard";
         return response.data;
     } catch (error) {
         Swal.fire({
@@ -62,20 +75,36 @@ export const updateBlog = async (
     title: string,
     description: string,
     tag: string,
-    image: string
+    image: File | string
 ) => {
     try {
-        const response = await axios.put(`http://localhost:3000/blogs/${id}`, {
-            title,
-            description,
-            tag,
-            image,
-        });
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("tag", tag);
+
+        if (typeof image === "string") {
+            formData.append("image", image);
+        } else if (image) {
+            formData.append("image", image);
+        }
+
+        const response = await axios.put(
+            `http://localhost:3000/blogs/${id}`,
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            }
+        );
+
         Swal.fire({
             icon: "success",
             title: "Success...",
             text: "Update Blog Successfully!",
         });
+
         return response.data;
     } catch (error) {
         Swal.fire({
