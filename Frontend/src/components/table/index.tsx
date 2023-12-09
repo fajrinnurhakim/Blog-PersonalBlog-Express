@@ -10,7 +10,7 @@ interface Blog {
     updated_at: any;
 }
 
-const HomeCard = () => {
+const Table = () => {
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -35,30 +35,7 @@ const HomeCard = () => {
         return formattedDate;
     };
 
-    const renderBlog = (blog: Blog) => (
-        <div className="w-full shadow-md card bg-base-100" key={blog.id}>
-            <figure>
-                <img
-                    className="w-48"
-                    src={`http://localhost:3000/${blog.image}`}
-                    alt="Blog Image"
-                />
-            </figure>
-            <div className="card-body">
-                <h2 className="text-2xl font-bold">{blog.title}</h2>
-                <p className="text-red-500">
-                    @Fajrin_Nurhakim {formatDate(blog.updated_at)}
-                </p>
-                <p>{blog.description}</p>
-                <p>Tag : {blog.tag}</p>
-                <div className="justify-end card-actions">
-                    <button className="btn btn-primary">Read More</button>
-                </div>
-            </div>
-        </div>
-    );
-
-    const blogsPerPage = 3;
+    const blogsPerPage = 10;
     const indexOfLastBlog = currentPage * blogsPerPage;
     const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
     const currentBlogs = blogs.slice(indexOfFirstBlog, indexOfLastBlog);
@@ -67,11 +44,35 @@ const HomeCard = () => {
 
     return (
         <div className="w-2/3">
-            {currentBlogs.length > 0 ? (
-                currentBlogs.map(renderBlog)
-            ) : (
-                <p>No blogs available</p>
-            )}
+            <div className="overflow-x-auto">
+                <table className="table">
+                    <thead>
+                        <tr className="text-center">
+                            <th>No</th>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {currentBlogs.map((blog, index) => (
+                            <tr key={blog.id} className="text-center">
+                                <th>{index + 1}</th>
+                                <td>{blog.title}</td>
+                                <td>{formatDate(blog.updated_at)}</td>
+                                <td className="mx-auto space-x-2">
+                                    <button className="btn btn-primary">
+                                        Delete
+                                    </button>
+                                    <button className="btn btn-secondary">
+                                        Update
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
             <div className="mt-5 join">
                 {Array.from(
                     { length: Math.ceil(blogs.length / blogsPerPage) },
@@ -90,4 +91,4 @@ const HomeCard = () => {
     );
 };
 
-export default HomeCard;
+export default Table;
