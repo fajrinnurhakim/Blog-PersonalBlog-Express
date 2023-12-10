@@ -1,3 +1,4 @@
+import Footer from "../../components/footer";
 import HomeCard from "../../components/homeCard";
 import NavbarTop from "../../components/navbarTop";
 import ProfileCard from "../../components/profileCard";
@@ -14,6 +15,7 @@ function Home() {
                     <SideCard />
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

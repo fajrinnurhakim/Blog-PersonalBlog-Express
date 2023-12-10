@@ -12,6 +12,7 @@ const CreateBlog = () => {
         try {
             await createBlog(title, description, tag, image);
             console.log("success");
+            window.location.href = "/dashboard";
         } catch (error) {
             console.error("Error while creating blog:", error);
             Swal.fire({

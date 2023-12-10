@@ -50,10 +50,7 @@ const HomeCard = () => {
                     @Fajrin_Nurhakim {formatDate(blog.updated_at)}
                 </p>
                 <p>{blog.description}</p>
-                <p>Tag : {blog.tag}</p>
-                <div className="justify-end card-actions">
-                    <button className="btn btn-primary">Read More</button>
-                </div>
+                <p className="italic">Tag : {blog.tag}</p>
             </div>
         </div>
     );
