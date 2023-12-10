@@ -73,10 +73,6 @@ app.put("/blogs/:id", async (req, res) => {
             tag,
         };
 
-        if (req.file) {
-            updatedData.image = req.file.path;
-        }
-
         const blog = await prisma.blog.update({
             where: { id: Number(id) },
             data: updatedData,
