@@ -59,7 +59,6 @@ export const createBlog = async (
             title: "Success...",
             text: "Create Blog Successfully!",
         });
-        window.location.href = "/dashboard";
         return response.data;
     } catch (error) {
         Swal.fire({
