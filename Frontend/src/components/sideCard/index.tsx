@@ -39,7 +39,7 @@ const SideCard = () => {
             key={blog.id}
         >
             <div className="card-body">
-                <h2 className="text-2xl font-bold">{blog.title}</h2>
+                <h2 className="text-sm font-bold">{blog.title}</h2>
                 <p className="text-red-500">{formatDate(blog.updated_at)}</p>
             </div>
         </a>

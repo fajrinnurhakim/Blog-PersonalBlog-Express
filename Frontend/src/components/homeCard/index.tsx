@@ -36,12 +36,12 @@ const HomeCard = () => {
     };
 
     const renderBlog = (blog: Blog) => (
-        <div className="w-full shadow-md card bg-base-100" key={blog.id}>
+        <div className="shadow-md card bg-base-100" key={blog.id}>
             <figure>
                 <img
-                    className="w-48"
-                    src={`http://localhost:3000/${blog.image}`}
+                    src={`http://localhost:5000/${blog.image}`}
                     alt="Blog Image"
+                    className="h-80"
                 />
             </figure>
             <div className="card-body">
@@ -64,19 +64,21 @@ const HomeCard = () => {
 
     return (
         <div className="w-2/3">
-            {currentBlogs.length > 0 ? (
-                currentBlogs.map(renderBlog)
-            ) : (
-                <p>No blogs available</p>
-            )}
-            <div className="mt-5 join">
+            <div className="flex w-full space-x-2">
+                {currentBlogs.length > 0 ? (
+                    currentBlogs.map(renderBlog)
+                ) : (
+                    <p>No blogs available</p>
+                )}
+            </div>
+            <div>
                 {Array.from(
                     { length: Math.ceil(blogs.length / blogsPerPage) },
                     (_, index) => (
                         <button
                             key={index + 1}
                             onClick={() => paginate(index + 1)}
-                            className="join-item btn"
+                            className="mt-5 join-item btn"
                         >
                             {index + 1}
                         </button>

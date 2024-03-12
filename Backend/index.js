@@ -2,8 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const path = require("path");
-const port = 3000;
+const port = 5000;
 const multer = require("multer");
 const { PrismaClient } = require("@prisma/client");
 

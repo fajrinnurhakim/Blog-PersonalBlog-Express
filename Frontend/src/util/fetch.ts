@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
 export const getBlogs = async () => {
     try {
-        const response = await axios.get("http://localhost:3000/blogs");
+        const response = await axios.get("http://localhost:5000/blogs");
 
         return response.data;
     } catch (error) {
@@ -17,7 +17,7 @@ export const getBlogs = async () => {
 
 export const getBlogById = async (id: string) => {
     try {
-        const response = await axios.get(`http://localhost:3000/blogs/${id}`);
+        const response = await axios.get(`http://localhost:5000/blogs/${id}`);
 
         return response.data;
     } catch (error) {
@@ -45,7 +45,7 @@ export const createBlog = async (
         }
 
         const response = await axios.post(
-            `http://localhost:3000/blogs`,
+            `http://localhost:5000/blogs`,
             formData,
             {
                 headers: {
@@ -76,7 +76,7 @@ export const updateBlog = async (
     tag: string
 ) => {
     try {
-        const response = await axios.put(`http://localhost:3000/blogs/${id}`, {
+        const response = await axios.put(`http://localhost:5000/blogs/${id}`, {
             title,
             description,
             tag,
@@ -101,7 +101,7 @@ export const updateBlog = async (
 export const deleteBlog = async (id: string) => {
     try {
         const response = await axios.delete(
-            `http://localhost:3000/blogs/${id}`
+            `http://localhost:5000/blogs/${id}`
         );
         Swal.fire({
             icon: "success",
